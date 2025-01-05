@@ -88,6 +88,17 @@ function addInputToTasks() {
     arrayOfTasks.push(data);
     addTasksToArray(data);
     window.localStorage.setItem("tasks", JSON.stringify(arrayOfTasks));
+  } else {
+    let timeOut = 3;
+    let errorMsg = document.querySelector(".errorMsg");
+    errorMsg.style.cssText = "display : block";
+    let errorMessage = setInterval(() => {
+      timeOut--;
+      if (timeOut === 0) {
+        clearInterval(errorMessage);
+        errorMsg.style.cssText = "display : none";
+      }
+    }, 1000);
   }
 }
 

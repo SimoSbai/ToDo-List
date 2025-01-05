@@ -20,12 +20,40 @@ body {
   padding: 20px;
   display: flex;
   align-items: center;
+  position: relative;
 }
 .input {
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 6px;
   flex: 1;
+}
+.errorMsg {
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 1px solid #f44336;
+  background-color: #fff1f0;
+  padding: 16px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #f44336;
+  display: none;
+}
+.errorMsg::before {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  clip-path: polygon(100% 0%, 0% 100%, 100% 100%);
+  background-color: #fff1f0;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -21.5px;
+  rotate: 45deg;
+  border: 1px solid #f44336;
 }
 .input:focus {
   outline: none;
