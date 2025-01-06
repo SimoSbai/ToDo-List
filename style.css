@@ -22,7 +22,8 @@ body {
   align-items: center;
   position: relative;
 }
-.input {
+.input,
+.changeNameInput {
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 6px;
@@ -72,10 +73,14 @@ body {
   margin-top: 20px;
   border-radius: 6px;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 .tasks .task {
   background-color: white;
   padding: 10px;
+  width: 100%;
   border-radius: 6px;
   display: flex;
   justify-content: space-between;
@@ -84,9 +89,7 @@ body {
   cursor: pointer;
   border: 1px solid #ccc;
 }
-.tasks .task:not(:last-child) {
-  margin-bottom: 15px;
-}
+
 .tasks .task:hover {
   background-color: #f7f7f7;
 }
@@ -102,7 +105,8 @@ body {
   border-radius: 4px;
   cursor: pointer;
 }
-.popup {
+.popup,
+.changeNamePopup {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -114,7 +118,8 @@ body {
   place-items: center;
   display: none;
 }
-.popupContent {
+.popupContent,
+.changeNameContainer {
   background-color: white;
   padding: 20px;
   display: flex;
@@ -142,7 +147,8 @@ body {
   border-radius: 4px;
   font-size: 12px;
 }
-.buttons button {
+.buttons button,
+.changeNameButton {
   width: 100%;
   padding: 10px 12px;
   border-radius: 4px;
@@ -156,4 +162,16 @@ body {
 }
 .buttons .btn2 {
   background-color: red;
+}
+
+.changeNameButton {
+  width: 50%;
+  margin: 0 auto;
+  background-color: green;
+}
+
+.mainDiv {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }

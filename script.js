@@ -19,12 +19,24 @@ function getDataFromLocalStorage() {
 }
 
 // Add tasks to Page
+let changeNamePopup = document.createElement("div");
+let changeNameContainer = document.createElement("div");
+let heading = document.createElement("h1");
+let changeNameInput = document.createElement("input");
+let changeNameButton = document.createElement("button");
+heading.append("Change your task name");
+
 function addTasksToArray(yourTask) {
+  let mainDiv = document.createElement("div");
   let taskElement = document.createElement("div");
-  taskElement.append(yourTask.task);
+  let taskName = document.createElement("div");
+  mainDiv.classList.add("mainDiv");
+  taskName.append(yourTask.task);
+  taskElement.append(taskName);
   taskElement.classList.add("task");
   taskElement.id = `${yourTask.id}`;
-  tasks.appendChild(taskElement);
+  mainDiv.appendChild(taskElement);
+  tasks.appendChild(mainDiv);
 
   let span = document.createElement("span");
   span.innerHTML = yourTask.status || "";
@@ -33,7 +45,7 @@ function addTasksToArray(yourTask) {
   taskElement.addEventListener("click", (e) => {
     popup.style.cssText = "display:grid";
     named.innerHTML = "";
-    named.append(`Name : ${e.target.firstChild.textContent}`);
+    named.append(`Name : ${taskName.textContent}`);
     named.style.cssText = "font-weight:600; color: #a9a9a9";
 
     button1.onclick = () => {
@@ -62,7 +74,7 @@ function addTasksToArray(yourTask) {
       );
       if (taskIndex !== -1) {
         arrayOfTasks.splice(taskIndex, 1);
-        taskElement.remove();
+        mainDiv.remove();
         window.localStorage.setItem("tasks", JSON.stringify(arrayOfTasks)); // Save to local storage
       }
       popup.style.cssText = "display:none";
@@ -75,6 +87,36 @@ function addTasksToArray(yourTask) {
   if (yourTask.status === "") {
     span.style.cssText = "background-color:transparent";
   }
+
+  let modifyIcon = document.createElement("img");
+  modifyIcon.src = "images/modifyIcon.svg";
+  modifyIcon.style.cssText =
+    "height : 40px;width : 40px; padding: 8px; background-color:black; border-radius:4px; cursor:pointer";
+  mainDiv.appendChild(modifyIcon);
+
+  modifyIcon.onclick = function () {
+    changeNameInput.value = "";
+    changeNamePopup.classList.add("changeNamePopup");
+    changeNameContainer.classList.add("changeNameContainer");
+    heading.style.cssText = "font-size:20px; text-align : center";
+    changeNameInput.classList.add("changeNameInput");
+    changeNameButton.classList.add("changeNameButton");
+    changeNameButton.innerHTML = "Save";
+    changeNamePopup.style.cssText = "display:grid";
+    document.querySelector(".container").appendChild(changeNamePopup);
+    changeNamePopup.appendChild(changeNameContainer);
+    changeNameContainer.appendChild(heading);
+    changeNameContainer.appendChild(changeNameInput);
+    changeNameContainer.appendChild(changeNameButton);
+    changeNameInput.focus();
+    changeNameButton.onclick = function () {
+      changeNamePopup.style.cssText = "display:none";
+      taskName.innerHTML = "";
+      yourTask.task = changeNameInput.value;
+      taskName.append(yourTask.task);
+      window.localStorage.setItem("tasks", JSON.stringify(arrayOfTasks));
+    };
+  };
 }
 
 // Add tasks to Local storage
